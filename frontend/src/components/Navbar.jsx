@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Button, Chip } from '@heroui/react'
 import { AppContext } from '../App'
 
 function Navbar() {
@@ -6,19 +7,19 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">Photos API</div>
-      <div className="navbar-actions">
+      <span className="navbar__brand">Photos API</span>
+      <div className="navbar__actions">
         {user ? (
           <>
-            <span className="navbar-user">{user}</span>
-            <button type="button" className="btn btn-outline" onClick={logout}>
+            <Chip variant="flat" size="sm">{user}</Chip>
+            <Button variant="outline" onPress={logout}>
               Déconnexion
-            </button>
+            </Button>
           </>
         ) : (
-          <button type="button" className="btn btn-primary" onClick={() => setShowLogin(true)}>
+          <Button variant="primary" onPress={() => setShowLogin(true)}>
             Se connecter
-          </button>
+          </Button>
         )}
       </div>
     </nav>

@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { Card } from '@heroui/react'
 import { AppContext } from '../App'
 
 const API_BASE = 'http://localhost:3000'
@@ -14,14 +15,24 @@ function LatestImage() {
   }, [setLatestPost])
 
   return (
-    <section className="section-latest">
-      <h2>Dernière photo</h2>
-      {latestPost ? (
-        <img src={latestPost} alt="Dernière photo" className="latest-image" />
-      ) : (
-        <p>Aucune photo pour le moment. Connecte-toi et envoie la première.</p>
-      )}
-    </section>
+    <Card className="card-block">
+      <Card.Header>
+        <Card.Title>Dernière photo</Card.Title>
+      </Card.Header>
+      <Card.Content>
+        {latestPost ? (
+          <img
+            src={latestPost}
+            alt="Dernière photo"
+            className="latest-image-wrap"
+          />
+        ) : (
+          <p className="latest-image-empty">
+            Aucune photo pour le moment. Connecte-toi et envoie la première.
+          </p>
+        )}
+      </Card.Content>
+    </Card>
   )
 }
 

@@ -1,10 +1,12 @@
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
+import { Card, Button, Spinner, Label } from '@heroui/react'
 import { AppContext } from '../App'
 
 const API_BASE = 'http://localhost:3000'
 
 function FileForm() {
   const { user, setLatestPost } = useContext(AppContext)
+  const [uploading, setUploading] = useState(false)
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -21,6 +23,7 @@ function FileForm() {
   function submitToAPI(data) {
     const token = localStorage.getItem('jwt')
     if (!token) return
+    setUploading(true)
     const headers = { Authorization: `Bearer ${token}` }
 
     fetch(`${API_BASE}/photos`, {
@@ -49,6 +52,7 @@ function FileForm() {
         console.error(error)
         window.alert(error.message || 'Erreur lors de l’upload.')
       })
+      .finally(() => setUploading(false))
   }
 
   function fetchLatest() {
@@ -60,22 +64,48 @@ function FileForm() {
 
   if (!user) {
     return (
-      <section className="section-upload">
-        <h2>Uploader une photo</h2>
-        <p className="upload-cta">Connecte-toi avec le bouton « Se connecter » dans la barre de navigation pour pouvoir uploader des photos.</p>
-      </section>
+      <Card className="card-block">
+        <Card.Header>
+          <Card.Title>Uploader une photo</Card.Title>
+        </Card.Header>
+        <Card.Content>
+          <p className="latest-image-empty">
+            Connecte-toi avec le bouton « Se connecter » dans la barre de navigation pour pouvoir uploader des photos.
+          </p>
+        </Card.Content>
+      </Card>
     )
   }
 
   return (
-    <section className="section-upload">
-      <h2>Uploader une photo</h2>
-      <form onSubmit={(e) => handleSubmit(e)} className="upload-form">
-        <label htmlFor="image">Image</label>
-        <input type="file" name="image" id="image" accept="image/*" required />
-        <button type="submit" className="btn btn-primary">Envoyer la photo</button>
-      </form>
-    </section>
+    <Card className="card-block">
+      <Card.Header>
+        <Card.Title>Uploader une photo</Card.Title>
+      </Card.Header>
+      <Card.Content>
+        <form onSubmit={(e) => handleSubmit(e)} className="upload-form">
+          <Label htmlFor="image" className="upload-form__label">Image</Label>
+          <input
+            id="image"
+            name="image"
+            type="file"
+            accept="image/*"
+            required
+            className="upload-form__input"
+          />
+          <div className="upload-form__submit">
+            <Button variant="primary" type="submit" isPending={uploading}>
+              {({ isPending }) => (
+                <>
+                  {isPending ? <Spinner color="current" size="sm" /> : null}
+                  {isPending ? 'Envoi…' : 'Envoyer'}
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
+      </Card.Content>
+    </Card>
   )
 }
 

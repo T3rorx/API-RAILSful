@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react'
+import { Modal, Button, Input, Label, Spinner, Alert } from '@heroui/react'
 import { AppContext } from '../App'
 
 const API_BASE = 'http://localhost:3000'
@@ -41,40 +42,68 @@ function LoginForm() {
   }
 
   return (
-    <div className="login-overlay" onClick={() => setShowLogin(false)}>
-      <div className="login-modal" onClick={(e) => e.stopPropagation()}>
-        <h2>Connexion</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="login-email">Email</label>
-          <input
-            id="login-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="user1@example.com"
-            required
-          />
-          <label htmlFor="login-password">Mot de passe</label>
-          <input
-            id="login-password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            required
-          />
-          {error && <p className="login-error">{error}</p>}
-          <div className="login-buttons">
-            <button type="button" className="btn btn-outline" onClick={() => setShowLogin(false)}>
-              Annuler
-            </button>
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? 'Connexion…' : 'Se connecter'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Modal>
+      <Modal.Trigger>
+        <button type="button" aria-hidden style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }} />
+      </Modal.Trigger>
+      <Modal.Backdrop
+        isOpen
+        onOpenChange={(isOpen) => { if (!isOpen) setShowLogin(false) }}
+      >
+        <Modal.Container size="sm">
+          <Modal.Dialog>
+            <Modal.Header>
+              <Modal.Heading>Connexion</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <form id="login-form" onSubmit={handleSubmit} className="login-form">
+                <Label htmlFor="login-email">Email</Label>
+                <Input
+                  id="login-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="user1@example.com"
+                  fullWidth
+                  isRequired
+                />
+                <Label htmlFor="login-password">Mot de passe</Label>
+                <Input
+                  id="login-password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  fullWidth
+                  isRequired
+                />
+                {error && (
+                  <Alert status="danger">
+                    <Alert.Content>
+                      <Alert.Title>Erreur</Alert.Title>
+                      <Alert.Description>{error}</Alert.Description>
+                    </Alert.Content>
+                  </Alert>
+                )}
+                <div className="login-form__actions">
+                  <Button variant="outline" onPress={() => setShowLogin(false)}>
+                    Annuler
+                  </Button>
+                  <Button variant="primary" type="submit" isPending={loading}>
+                    {({ isPending }) => (
+                      <>
+                        {isPending ? <Spinner color="current" size="sm" /> : null}
+                        {isPending ? 'Connexion…' : 'Se connecter'}
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
   )
 }
 
