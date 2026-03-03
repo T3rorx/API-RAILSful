@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# encrypted_password is bcrypt hash for "password123" (cost 4)
+
+one:
+  email: user1@test.com
+  encrypted_password: $2a$04$xnIa53oTIkbSfNkYdWPMeexTtfH23.Bd8XXYb.XlNXFtnZp5GW7Cm
+
+two:
+  email: user2@test.com
+  encrypted_password: $2a$04$xnIa53oTIkbSfNkYdWPMeexTtfH23.Bd8XXYb.XlNXFtnZp5GW7Cm

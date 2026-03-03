@@ -1,0 +1,41 @@
+# ============== Rails ==============
+# Logs and temp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Storage (uploads, SQLite DBs)
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+/config/master.key
+
+# Bundler
+/.bundle
+/vendor/bundle
+
+# IDE / OS
+.byebug_history
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Ruby LSP (optional cache)
+/.ruby-lsp/
+
+# ============== Frontend (Vite) - racine ==============
+# En cas de node_modules ou build à la racine
+/node_modules
+/frontend/node_modules
+/frontend/dist
+/frontend/dist-ssr

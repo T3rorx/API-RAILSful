@@ -1,0 +1,196 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  min-height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-user {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #0b5ed7;
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.btn-outline:hover {
+  background: #e7f1ff;
+}
+
+/* Login modal */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.login-modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 320px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.login-modal h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.login-modal label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.login-modal input[type="email"],
+.login-modal input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login-error {
+  color: #c00;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.login-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.section-upload,
+.section-latest {
+  margin-top: 2rem;
+}
+
+.section-upload h2,
+.section-latest h2 {
+  margin-bottom: 1rem;
+}
+
+.upload-cta {
+  color: #666;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.upload-form input[type="file"] {
+  padding: 0.25rem;
+}
+
+.latest-image {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
