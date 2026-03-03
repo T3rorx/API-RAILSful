@@ -77,7 +77,12 @@
   cursor: pointer;
 }
 
-/* Dernière photo : image centrée, dimensions raisonnables */
+/* Dernière photo : lien cliquable vers l'image en pleine taille */
+.latest-image-link {
+  cursor: pointer;
+  display: block;
+}
+
 .latest-image-wrap {
   display: block;
   max-width: 300px;

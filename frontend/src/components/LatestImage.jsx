@@ -21,11 +21,19 @@ function LatestImage() {
       </Card.Header>
       <Card.Content>
         {latestPost ? (
-          <img
-            src={latestPost}
-            alt="Dernière photo"
-            className="latest-image-wrap"
-          />
+          <a
+            href={latestPost}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="latest-image-link"
+            title="Ouvrir en pleine taille"
+          >
+            <img
+              src={latestPost}
+              alt="Dernière photo"
+              className="latest-image-wrap"
+            />
+          </a>
         ) : (
           <p className="latest-image-empty">
             Aucune photo pour le moment. Connecte-toi et envoie la première.

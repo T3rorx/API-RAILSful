@@ -84,7 +84,7 @@ Le front tourne sur **http://localhost:3001**. Si le port 3000 est pris par un a
 
 - **Connexion** : bouton « Se connecter » dans la barre → email (ex. `user1@example.com`) et mot de passe (`password123` avec le seed).
 - **Upload** : une fois connecté, formulaire « Uploader une photo » pour envoyer une image (POST `/photos`).
-- **Dernière photo** : affichée en dessous ; mise à jour après chaque upload.
+- **Dernière photo** : affichée en dessous ; clic pour l’ouvrir en pleine taille (nouvel onglet). Mise à jour après chaque upload. Toutes les photos sont conservées côté API ; seul l’affichage « Dernière photo » montre la plus récente.
 
 ## Tests
 
