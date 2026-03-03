@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 const API_BASE = 'http://localhost:3000'
 
-function FileForm() {
+function FileForm({ inModal = false, onSuccess }) {
   const { user, setLatestPost } = useContext(AppContext)
   const [uploading, setUploading] = useState(false)
 
@@ -47,6 +47,7 @@ function FileForm() {
       .then((data) => {
         if (data && data.image_url) setLatestPost(data.image_url)
         else fetchLatest()
+        onSuccess?.()
       })
       .catch((error) => {
         console.error(error)
@@ -62,7 +63,7 @@ function FileForm() {
       .catch((err) => console.error(err))
   }
 
-  if (!user) {
+  if (!inModal && !user) {
     return (
       <Card className="card-block">
         <Card.Header>
@@ -77,13 +78,8 @@ function FileForm() {
     )
   }
 
-  return (
-    <Card className="card-block">
-      <Card.Header>
-        <Card.Title>Uploader une photo</Card.Title>
-      </Card.Header>
-      <Card.Content>
-        <form onSubmit={(e) => handleSubmit(e)} className="upload-form">
+  const formContent = (
+    <form onSubmit={(e) => handleSubmit(e)} className="upload-form">
           <Label htmlFor="image" className="upload-form__label">Image</Label>
           <input
             id="image"
@@ -103,7 +99,20 @@ function FileForm() {
               )}
             </Button>
           </div>
-        </form>
+    </form>
+  )
+
+  if (inModal) {
+    return formContent
+  }
+
+  return (
+    <Card className="card-block">
+      <Card.Header>
+        <Card.Title>Uploader une photo</Card.Title>
+      </Card.Header>
+      <Card.Content>
+        {formContent}
       </Card.Content>
     </Card>
   )

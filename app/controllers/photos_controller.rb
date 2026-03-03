@@ -5,10 +5,18 @@ class PhotosController < ApplicationController
   before_action :authenticate_user!, only: %i[ create update destroy ]
   before_action :authorize_photo_owner!, only: %i[ update destroy ]
 
-  # GET /photos
+  # GET /photos (optional: ?page=1&per_page=12)
   def index
-    @photos = Photo.all
-    render json: @photos
+    page = (params[:page] || 1).to_i
+    per_page = [(params[:per_page] || 12).to_i, 100].min
+    total = Photo.count
+    @photos = Photo.order(created_at: :desc)
+                   .offset((page - 1) * per_page)
+                   .limit(per_page)
+    render json: {
+      photos: @photos.map { |p| p.as_json(methods: [:image_url]) },
+      total: total
+    }
   end
 
   # GET /photos/1

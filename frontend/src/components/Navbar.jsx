@@ -3,7 +3,7 @@ import { Button, Chip } from '@heroui/react'
 import { AppContext } from '../App'
 
 function Navbar() {
-  const { user, setShowLogin, logout } = useContext(AppContext)
+  const { user, setShowLogin, setShowUploadModal, logout } = useContext(AppContext)
 
   return (
     <nav className="navbar">
@@ -11,6 +11,9 @@ function Navbar() {
       <div className="navbar__actions">
         {user ? (
           <>
+            <Button variant="primary" onPress={() => setShowUploadModal(true)}>
+              Ajouter une photo
+            </Button>
             <Chip variant="flat" size="sm">{user}</Chip>
             <Button variant="outline" onPress={logout}>
               Déconnexion
